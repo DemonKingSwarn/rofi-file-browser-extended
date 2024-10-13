@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+c1421c892bc4494cce30b4feb07a6bbe CMakeFiles/manpage
+9dd7cb3a4640866296ab11a42d45ff6b doc/rofi-file-browser-extended.1.gz

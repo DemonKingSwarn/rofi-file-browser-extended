@@ -1,0 +1,2 @@
+/usr/lib/rofi/filebrowser.so
+/usr/share/man/man1/rofi-file-browser-extended.1.gz

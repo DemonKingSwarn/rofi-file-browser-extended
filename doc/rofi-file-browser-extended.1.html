@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html;charset=utf8'>
+  <meta name='generator' content='Ronn-NG/v0.9.1 (http://github.com/apjanke/ronn-ng/tree/0.9.1)'>
+  <title>rofi-file-browser-extended(1) - use rofi to quickly open files</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#USAGE">USAGE</a>
+    <a href="#CONFIGURATION">CONFIGURATION</a>
+    <a href="#KEY-BINDINGS">KEY BINDINGS</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#TROUBLESHOOTING">TROUBLESHOOTING</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>rofi-file-browser-extended(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>rofi-file-browser-extended(1)</li>
+  </ol>
+
+  
+
+<h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>rofi-file-browser-extended</code> - <span class="man-whatis">use rofi to quickly open files</span>
+</p>
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<p><code>rofi -show file-browser-extended [ -file-browser-dir &lt;dir&gt; ] [ -file-browser-cmd &lt;cmd&gt; ]</code> <br>
+<code>rofi -show file-browser-extended [ -file-browser-depth &lt;depth&gt; ] [ -file-browser-follow-symlinks ]</code> <br>
+<code>rofi -show file-browser-extended [ -file-browser-oc-cmd &lt;cmd&gt; ] [ -file-browser-oc-search-path ]</code> <br>
+<code>fd | rofi -show file-browser-extended -file-browser-stdin</code></p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p><strong>rofi-file-browser-extended</strong> is a configurable file browser plugin for rofi.
+It's main use case is to quickly open files without having to open a window to
+navigate to the file.</p>
+
+<h2 id="USAGE">USAGE</h2>
+
+<h3 id="Resuming-from-the-last-opened-directory">Resuming from the last opened directory</h3>
+
+<p>Use <code>-file-browser-resume</code> to enable this behaviour.
+The plugin will write the current directory to the "resume file" before exiting, and read it on startup.
+The default resume file location is <code>$XDG_USER_CONFIG_DIR/rofi/file-browser-resume</code> (usually <code>$HOME/config/rofi/file-browser-resume</code>).
+A different resume file can be chosen via <code>-file-browser-resume-file</code>.</p>
+
+<h3 id="Listing-files-recursively">Listing files recursively</h3>
+
+<p><code>-file-browser-depth</code> can be used to list files recursively up to a certain depth.
+A depth of 0 means files are listed without a depth limit.</p>
+
+<p>Symlinks are not followed by default.
+<code>-file-browser-follow-symlinks</code> can be used to follow symlinks.
+When symlinks are followed, every file is still only reported once.</p>
+
+<h3 id="Opening-files-with-custom-commands">Opening files with custom commands</h3>
+
+<p>Press the <code>open custom</code> key (see <a href="#key-bindings" data-bare-link="true">Key bindings</a>) to enter <code>open custom</code> mode on the selected file.
+The plugin will then display a list of commands to open the selected file with.</p>
+
+<ul>
+  <li>All executables in <code>$PATH</code> can be added to this list with <code>-file-browser-oc-search-path</code>.</li>
+  <li>User-defined commands can be added with <code>-file-browser-oc-cmd</code> (multiple by passing the option multiple times).</li>
+  <li>If no commands are specified, the file to be opened will be shown instead of a list of commands.</li>
+</ul>
+
+<p>User-defined commands can optionally specify an icon and a display name (with pango markup).</p>
+
+<p>Format:</p>
+
+<pre><code>&lt;command&gt;;icon:&lt;icon-name&gt;;name:&lt;name-to-displayed&gt;
+</code></pre>
+
+<p><code>icon</code> and <code>name</code> are optional.
+The order of <code>icon</code> and <code>name</code> does not matter as long as the command comes first.</p>
+
+<p>Example:</p>
+
+<pre><code>-file-browser-oc-cmd "gimp"
+-file-browser-oc-cmd "pcmanfm-qt;name:pcmanfm;icon:system-file-manager"
+-file-browser-oc-cmd "deadbeef --queue;icon:deadbeef;name:deadbeef &lt;i&gt;(queue)&lt;/i&gt;"
+</code></pre>
+
+<h3 id="Reading-paths-from-stdin">Reading paths from stdin</h3>
+
+<p><code>-file-browser-stdin</code> can be used to read displayed paths from stdin.
+Paths must either be relative to the starting directory (<code>-file-browser-dir</code>) or absolute.
+It is not checked if the paths actually exist.
+The paths are not sorted or matched to any exclude patters.</p>
+
+<p>After reading the paths, the plugin behaves no different than usual.
+You may want to use this option with <code>-file-browser-no-descend</code> and / or <code>-file-browser-stdout</code>
+to make it more dmenu-like.</p>
+
+<p>Example:</p>
+
+<pre><code>fd | rofi -show file-browser-extended -file-browser-stdin
+fd -a | rofi -show file-browser-extended -file-browser-stdin
+ls somedir | rofi -show file-browser-extended -file-browser-stdin -file-browser-dir somedir
+</code></pre>
+
+<h2 id="CONFIGURATION">CONFIGURATION</h2>
+
+<p>The default config file location is <code>$XDG_USER_CONFIG_DIR/rofi/file-browser</code> (usually to <code>$HOME/config/rofi/file-browser</code>).
+The config file consists of newline-separated command line options <strong>without</strong> the <strong>"-file-browser-"</strong> prefix. Each key and value should be
+separated by one or more space characters.</p>
+
+<p>Example:</p>
+
+<pre><code>cmd        "exo-open"
+oc-cmd     "evince;icon:evince"
+oc-cmd     "gimp;icon:gimp"
+depth      2
+
+open-parent-as-self
+</code></pre>
+
+<p>Comments start with <code>#</code>.
+Quotes inside string arguments must not be escaped.
+Escape sequences are currently not supported.</p>
+
+<p>Command line options will override the config file (or add to the config file arguments if the option can be specified multiple times).
+A different config file can be specified with <code>-file-browser-config</code> (multiple by passing the option multiple times).
+All command line options but <code>-file-browser-config</code> itself can be used in the config file.</p>
+
+<h2 id="KEY-BINDINGS">KEY BINDINGS</h2>
+
+<ul>
+  <li>
+    <p><code>kb-accept-alt</code>, <em>(default: Shift+Return)</em></p>
+
+    <p><code>open custom</code>: Open the selected file with a custom command.</p>
+  </li>
+  <li>
+    <p><code>kb-custom-1</code>, <em>(default: Alt+1)</em></p>
+
+    <p><code>open multi</code>: Open the selected file without closing rofi.
+Can be used in the prompt of <code>open custom</code>.</p>
+  </li>
+  <li>
+    <p><code>kb-custom-2</code>, <em>(default: Alt+2)</em></p>
+
+    <p>Toggle hidden files.</p>
+  </li>
+</ul>
+
+<p>Key bindings can be changed via command line options (see <a href="#key-bindings-1" data-bare-link="true">Command line options/Key bindings</a>).</p>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<h3 id="Behaviour">Behaviour</h3>
+
+<dl>
+<dt>
+<code>-file-browser-cmd</code> <em><var>cmd</var></em>
+</dt>
+<dd>Set the command to open selected files with.
+<strong>(default: <code>xdg-open</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-dir</code> <em><var>path</var></em>
+</dt>
+<dd>Set the starting directory.
+<strong>(default: current working directory)</strong>
+</dd>
+<dt><code>-file-browser-resume</code></dt>
+<dd>Resume from the last opened directory.
+<strong>(default: disabled)</strong>
+</dd>
+<dt>
+<code>-file-browser-resume-file</code> <em><var>path</var></em>
+</dt>
+<dd>Set the resume file. When resuming is enabled, the path of the last opened directory is saved to this file.
+<strong>(default: <code>$XDG_USER_CONFIG_DIR/rofi/file-browser-resume</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-depth</code> <em><var>depth</var></em>
+</dt>
+<dd>List files recursively until a depth is reached.
+A value of 0 means no depth limit.
+<strong>(default: 1)</strong>
+</dd>
+<dt><code>-file-browser-follow-symlinks</code></dt>
+<dd>Follow symlinks when listing files recursively.
+<strong>(default: don't follow symlinks)</strong>
+
+    <p>When symlinks are followed, every file is still only reported once.</p>
+</dd>
+<dt><code>-file-browser-show-hidden</code></dt>
+<dd>Show hidden files.
+<strong>(default: hidden)</strong>
+</dd>
+<dt><code>-file-browser-only-dirs</code></dt>
+<dd>Only show directories.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-only-files</code></dt>
+<dd>Only show files.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-no-descend</code></dt>
+<dd>Open directories instead of descending into them.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-open-parent-as-self</code></dt>
+<dd>Treat the parent directory (<code>..</code>) as the current directory when opened.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-exclude</code></dt>
+<dd>Exclude paths by matching the basename to glob patterns.
+<strong>(default: none)</strong>
+
+    <p>Supports <code>*</code> and <code>?</code>.</p>
+</dd>
+<dt><code>-file-browser-stdin</code></dt>
+<dd>Read paths from stdin.
+<strong>(default: disabled)</strong>
+
+    <p>Paths must either be relative to the starting directory (<code>-file-browser-dir</code>) or absolute.
+It is not checked if the files actually exist.
+The paths are not sorted or matched to any exclude patters.</p>
+</dd>
+<dt><code>-file-browser-stdout</code></dt>
+<dd>Instead of opening files, print absolute paths of selected files to stdout.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-oc-search-path</code></dt>
+<dd>Search <code>$PATH</code> for executables and display them in <code>open custom</code> mode (after user-defined commands).
+<strong>(default: disabled)</strong>
+</dd>
+<dt>
+<code>-file-browser-oc-cmd</code> <em><var>cmd</var></em>
+</dt>
+<dd>Specify user-defined commands to be displayed in <code>open custom</code> mode.
+<strong>(default: none)</strong>
+
+    <p>Format: <code>&lt;command&gt;;icon:&lt;icon-name&gt;;name:&lt;name-to-displayed&gt;</code></p>
+
+    <p><code>icon</code> and <code>name</code> are optional.
+The order of <code>icon</code> and <code>name</code> does not matter as long as the command comes first.
+<code>name</code> may use pango markup.</p>
+</dd>
+<dt>
+<code>-file-browser-sort-by-type</code>, <code>-file-browser-no-sort-by-type</code>
+</dt>
+<dd>Enable / disable sort-by-type (directories first, files second, inaccessible directories last).
+<strong>(default: enabled)</strong>
+</dd>
+<dt>
+<code>-file-browser-sort-by-depth</code>, <code>-file-browser-no-sort-by-depth</code>
+</dt>
+<dd>Enable / disable sort-by-depth when listing files recursively.
+Sort-by-type is secondary to sort-by-depth if both are enabled.
+<strong>(default: disabled)</strong>
+</dd>
+<dt><code>-file-browser-hide-parent</code></dt>
+<dd>Hide the parent directory (<code>..</code>).
+<strong>(default: shown)</strong>
+</dd>
+<dt>
+<code>-file-browser-config</code> <em><var>path</var></em>
+</dt>
+<dd>Load options from the specified config file.
+<strong>(default: <code>$XDG_USER_CONFIG_DIR/rofi/file-browser</code>)</strong>
+
+    <p>Can be used multiple times to load options from multiple config files.
+When this option is specified, the default config file will not be loaded.</p>
+</dd>
+</dl>
+
+<h3 id="Key-bindings">Key bindings</h3>
+
+<p>Supported key bindings are <code>kb-accept-alt</code>, <code>kb-custom-[0-19]</code> and <code>none</code> (disables the key binding).
+You can change the actual key bindings that correspond to <code>kb-accept-alt</code> and <code>kb-custom-*</code> in rofi's options.
+Run <code>rofi -show keys</code> to display rofi's key bindings and what they are bound to.
+Run <code>rofi -dump-config</code> or <code>rofi -dump-xresources</code> to get a list of available options.</p>
+
+<dl>
+<dt>
+<code>-file-browser-open-custom-key</code> <em><var>rofi-key</var></em>
+</dt>
+<dd>Set the key binding for <code>open custom</code>.
+<strong>(default: <code>kb-accept-alt</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-open-multi-key</code> <em><var>rofi-key</var></em>
+</dt>
+<dd>Set the key binding for <code>open multi</code>.
+<strong>(default: <code>kb-custom-1</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-toggle-hidden-key</code> <em><var>rofi-key</var></em>
+</dt>
+<dd>Set the key binding for toggling hidden files.
+<strong>(default: <code>kb-custom-2</code>)</strong>
+</dd>
+</dl>
+
+<h3 id="Appearance">Appearance</h3>
+
+<dl>
+<dt><code>-file-browser-disable-icons</code></dt>
+<dd>Disable icons.
+<strong>(default: enabled)</strong>
+</dd>
+<dt><code>-file-browser-disable-thumbnails</code></dt>
+<dd>Disable thumbnails for image files.
+<strong>(default: enabled)</strong>
+</dd>
+<dt><code>-file-browser-disable-status</code></dt>
+<dd>Disable the status line that shows the current path.
+<strong>(default: enabled)</strong>
+</dd>
+<dt>
+<code>-file-browser-path-sep</code> <em><var>string</var></em>
+</dt>
+<dd>Set the path separator for the status line.
+<strong>(default: <code>" / "</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-hide-hidden-symbol</code> <em><var>string</var></em>
+</dt>
+<dd>Set the indicator that hidden files are hidden.
+<strong>(default: <code>"[-]"</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-show-hidden-symbol</code> <em><var>string</var></em>
+</dt>
+<dd>Set the indicator that hidden files are shown.
+<strong>(default: <code>"[+]"</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-up-text</code> <em><var>string</var></em>
+</dt>
+<dd>Set the text for the parent directory.
+<strong>(default: <code>".."</code>)</strong>.</dd>
+<dt>
+<code>-file-browser-up-icon</code> <em><var>icon-name</var></em>
+</dt>
+<dd>Set the icon for the parent directory.
+<strong>(default: <code>"go-up"</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-fallback-icon</code> <em><var>icon-name</var></em>
+</dt>
+<dd>Set the fallback icon used for files without icons (e.g. block devices).
+<strong>(default: <code>"text-x-generic"</code>)</strong>
+</dd>
+<dt>
+<code>-file-browser-inaccessible-icon</code> <em><var>icon-name</var></em>
+</dt>
+<dd>Set the icon for inaccessible directories.
+<strong>(default: <code>"error"</code>)</strong>
+</dd>
+</dl>
+
+<h2 id="TROUBLESHOOTING">TROUBLESHOOTING</h2>
+
+<p>If you encounter a problem, try running rofi from the command line.
+The plugin prints error messages if things go wrong.
+If that doesn't help, feel free to create a new issue on GitHub.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">rofi<span class="s">(1)</span></span>, <span class="man-ref">nftw<span class="s">(3)</span></span></p>
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>May 2022</li>
+    <li class='tr'>rofi-file-browser-extended(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>

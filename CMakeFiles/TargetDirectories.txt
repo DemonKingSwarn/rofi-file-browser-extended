@@ -1,0 +1,8 @@
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/filebrowser.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/manpage.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/edit_cache.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/rebuild_cache.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/list_install_components.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/install.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/install/local.dir
+/home/demonkingswarn/dl/gitthings/rofi-file-browser-extended/CMakeFiles/install/strip.dir
